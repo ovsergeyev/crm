@@ -2,6 +2,8 @@
 
 </script>
 
+<!-- TODO: Appwrite config + Auth -->
+
 <template>
   <aside class="px-5 py-8 bg-sidebar h-full relative w-full">
     <NuxtLink to="/" class="mb-10 block">
