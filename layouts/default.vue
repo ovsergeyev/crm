@@ -1,15 +1,20 @@
 <script type="ts" setup>
+
   console.log('Loaded')
 </script>
 
 <template>
-  <seciton>
+  <section class="grid" style="min-height: 100vh;">
+    <LayoutSidebar />
     <div>
       <slot></slot>
     </div>
-  </seciton>
+  </section>
 </template>
 
 <style scoped>
-
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+  }
 </style>
