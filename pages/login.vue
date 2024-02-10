@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useIsLoadingStore } from "~/store/loader.store";
+
   useHead({
     title: "Login"
   })
@@ -7,7 +9,8 @@
   const passwordRef = ref('');
   const nameRef = ref('');
 
-  
+  const isLoadingStore = useIsLoadingStore();
+  const router = useRouter();
 
 </script>
 
