@@ -11,7 +11,7 @@ const defaultValue: ILoaderStore = {
 export const useIsLoadingStore = defineStore('isLoading', {
   state: () => defaultValue,
   getters: {
-    isLoading: state => state.isLoading
+    isLoad: state => state.isLoading
   },
   actions: {
     set(data: boolean) {

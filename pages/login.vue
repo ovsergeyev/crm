@@ -1,4 +1,12 @@
 <script lang="ts" setup>
+import {v4 as uuid} from 'uuid'
+useSeoMeta({
+  title: 'Login | CRM System'
+})
+
+import { storeToRefs } from "pinia";
+import { account } from "~/lib/appwrite";
+import { useAuthStore } from "~/store/auth.store";
 import { useIsLoadingStore } from "~/store/loader.store";
 
   useHead({
@@ -10,7 +18,33 @@ import { useIsLoadingStore } from "~/store/loader.store";
   const nameRef = ref('');
 
   const isLoadingStore = useIsLoadingStore();
+  const authStore = useAuthStore();
   const router = useRouter();
+
+  const login = async () => {
+    isLoadingStore.set(true)
+    await account.createEmailSession(emailRef.value, passwordRef.value)
+    const response = await account.get()
+    if(response){
+      authStore.set({
+        email: response.email,
+        name: response.name,
+        status: response.status,
+      })
+    }
+
+    emailRef.value = ''
+    passwordRef.value = ''
+    nameRef.value = ''
+
+    await router.push('/')
+    isLoadingStore.set(false)
+  }
+
+  const register = async () => {
+    await account.create(uuid(), emailRef.value, passwordRef.value, nameRef.value)
+    await login()
+  }
 
 </script>
 
@@ -39,8 +73,8 @@ import { useIsLoadingStore } from "~/store/loader.store";
           v-model="nameRef"
         />
         <div class="flex items-center justify-center gap-5">
-          <UiButton type="button">Login</UiButton>
-          <UiButton type="button">Register</UiButton>
+          <UiButton type="button" @click="login">Login</UiButton>
+          <UiButton type="button" @click="register">Register</UiButton>
         </div>
       </form>
 
