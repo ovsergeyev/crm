@@ -47,4 +47,8 @@
     @apply bg-background text-foreground text-base;
     font-family: 'Latto', sans-serif;
   }
+
+  .bg-sidebar {
+    background-color: #1e293b;
+  }
 }
